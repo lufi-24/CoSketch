@@ -1,0 +1,20 @@
+{
+  "name": "@repo/backend-common",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "exports": {
+    "./config": "./index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.13.11",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

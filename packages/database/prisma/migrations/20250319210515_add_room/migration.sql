@@ -1,0 +1,12 @@
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+-- CreateTable
+CREATE TABLE "Room" (
+    "id" TEXT NOT NULL,
+    "RoomId" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Room_pkey" PRIMARY KEY ("id")
+);
