@@ -1,0 +1,58 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
+    "check-types": {
+      "dependsOn": ["^check-types"]
+    },
+
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+
+    "start": {
+      "dependsOn": ["start:frontend", "start:backend", "start:websocket"],
+      "cache": false
+    },
+    "start:frontend": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "start:backend": {
+      "dependsOn": ["^db:deploy"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "env": [
+        "JWT_SECRET",
+        "DATABASE_URL",
+        "JWT_EXPIRES_IN",
+        "FRONTEND_URL",
+        "NODE_ENV"
+      ]
+    },
+    "start:websocket": {
+      "dependsOn": ["^db:deploy"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "env": ["JWT_SECRET", "DATABASE_URL", "NODE_ENV"]
+    },
+
+    "generate": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:deploy": {
+      "cache": false,
+      "env": ["DATABASE_URL"]
+    }
+  }
+}
